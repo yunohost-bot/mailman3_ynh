@@ -4,7 +4,6 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -21,16 +20,9 @@ ynh_systemctl --service="$app-web" --action="stop"
 ynh_script_progression "Ensuring downward compatibility..."
 
 # Create missing db_user_* as copy of db_name_*
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=db_user_app --value="$db_name_app"
-if [ -z "${db_user_app:-}" ]; then
-	db_user_app="$db_name_app"
-	ynh_app_setting_set --key="db_user_app" --value="$db_user_app"
-fi
-# FIXMEhelpers2.1: maybe replace with: ynh_app_setting_set_default --key=db_user_web --value="$db_name_web"
-if [ -z "${db_user_web:-}" ]; then
-	db_user_web="$db_name_web"
-	ynh_app_setting_set --key="db_user_web" --value="$db_user_web"
-fi
+ynh_app_setting_set_default --key=db_user_app --value="$db_name_app"
+
+ynh_app_setting_set_default --key=db_user_web --value="$db_name_web"
 
 # Migrate rest_admin_* -> rest_api_admin_*
 if [ -z "${rest_api_admin_user:-}" ]; then
