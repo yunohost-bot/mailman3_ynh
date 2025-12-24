@@ -48,8 +48,6 @@ ynh_app_setting_set --key=secret_key --value="$secret_key"
 ynh_script_progression "Creating a PostgreSQL database..."
 # Can' use resource helper because we need 2 dbs with specific names…
 
-ynh_psql_test_if_first_run
-
 # mailman3-app database
 ynh_psql_create_db --db_user="$db_user_app" --db_name="$db_name_app" --db_pwd="$db_pwd_app"
 
