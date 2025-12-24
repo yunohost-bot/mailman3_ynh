@@ -19,15 +19,18 @@ admindoc = "https://docs.mailman3.org/en/latest/"
 userdoc = "http://docs.mailman3.org/en/latest/userguide.html"
 code = "https://gitlab.com/mailman/mailman-suite"
 cpe = "cpe:2.3:a:gnu:mailman"
+
 fund = "https://my.fsf.org/civicrm/contribute/transact?reset=1&id=22"
 
 [integration]
-yunohost = ">=11.2"
+yunohost = ">=12.1.17"
 helpers_version = "2.1"
 architectures = "all"
 multi_instance = false
+
 ldap = false
 sso = false
+
 disk = "500M"
 ram.build = "800M"
 ram.runtime = "800M"
@@ -59,7 +62,12 @@ ram.runtime = "800M"
     main.default = 8095
 
     [resources.apt]
-    packages = ["postgresql", "lynx", "mailman3-full"]
+    packages = [
+        "postgresql",
+        "lynx",
+        "mailman3-full",
+        "libpq-dev",
+        ]
 
     # Can' use resource helper because we need 2 dbs with specific names…
     # [resources.database]
